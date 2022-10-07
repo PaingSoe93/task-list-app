@@ -1,0 +1,23 @@
+type List {
+  id: ID!
+  name: String!
+  tasks: [Task!]!
+}
+
+input CreateListInput {
+  name: String!
+}
+
+input UpdateListInput {
+  name: String
+}
+
+type Query {
+  lists: [List]!
+  list(id: Int!): List
+}
+
+type Mutation {
+  createList(createListInput: CreateListInput!): List!
+  updateList(updateListInput: UpdateListInput!): List!
+}
