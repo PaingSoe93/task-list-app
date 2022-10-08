@@ -16,8 +16,6 @@ export class TaskUncheckedCreateInput {
     title!: string;
 
     @Field(() => Int, {nullable:false})
-    @Validator.IsNotEmpty()
-    @Validator.IsNumber()
     position!: number;
 
     @Field(() => String, {nullable:true})

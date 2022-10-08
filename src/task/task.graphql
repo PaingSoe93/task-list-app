@@ -19,22 +19,32 @@ type Task {
 
 input CreateTaskInput {
   title: String!
-  position: Int
-  status: TaskStatus!
+  status: TaskStatus
+  listId: Int!
 }
 
 input UpdateTaskInput {
   title: String
-  position: Int
   status: TaskStatus
 }
 
+input UpdateTaskPositionInput {
+  id: Int!
+  position: Int!
+}
+
+input OrderByParams {
+  field: String!
+  direction: String!
+}
+
 type Query {
-  tasks: [Task]!
+  tasks(orderBy: OrderByParams): [Task]!
   task(id: Int!): Task
 }
 
 type Mutation {
   createTask(createTaskInput: CreateTaskInput!): Task!
   updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  updateTaskPosition(updateTaskPositionInput: UpdateTaskPositionInput!): Task!
 }

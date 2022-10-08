@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
-import { ListCreateInput } from '../@generated/prisma-nestjs-graphql/list/list-create.input';
 
 @Injectable()
 export class ListService {
@@ -20,7 +19,11 @@ export class ListService {
     try {
       return this.prisma.list.findMany({
         include: {
-          tasks: true,
+          tasks: {
+            orderBy: {
+              position: 'asc',
+            },
+          },
         },
       });
     } catch (error) {

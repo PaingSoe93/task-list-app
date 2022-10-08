@@ -25,14 +25,23 @@ export class UpdateListInput {
 
 export class CreateTaskInput {
     title: string;
-    position?: Nullable<number>;
-    status: TaskStatus;
+    status?: Nullable<TaskStatus>;
+    listId: number;
 }
 
 export class UpdateTaskInput {
     title?: Nullable<string>;
-    position?: Nullable<number>;
     status?: Nullable<TaskStatus>;
+}
+
+export class UpdateTaskPositionInput {
+    id: number;
+    position: number;
+}
+
+export class OrderByParams {
+    field: string;
+    direction: string;
 }
 
 export class List {
@@ -46,7 +55,7 @@ export abstract class IQuery {
 
     abstract list(id: number): Nullable<List> | Promise<Nullable<List>>;
 
-    abstract tasks(): Nullable<Task>[] | Promise<Nullable<Task>[]>;
+    abstract tasks(orderBy?: Nullable<OrderByParams>): Nullable<Task>[] | Promise<Nullable<Task>[]>;
 
     abstract task(id: number): Nullable<Task> | Promise<Nullable<Task>>;
 }
@@ -59,6 +68,8 @@ export abstract class IMutation {
     abstract createTask(createTaskInput: CreateTaskInput): Task | Promise<Task>;
 
     abstract updateTask(updateTaskInput: UpdateTaskInput): Task | Promise<Task>;
+
+    abstract updateTaskPosition(updateTaskPositionInput: UpdateTaskPositionInput): Task | Promise<Task>;
 }
 
 export class Task {

@@ -1,7 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { TaskCreateInput } from '../@generated/prisma-nestjs-graphql/task/task-create.input';
 import { TaskUncheckedUpdateInput } from '../@generated/prisma-nestjs-graphql/task/task-unchecked-update.input';
 import { TaskWhereUniqueInput } from '../@generated/prisma-nestjs-graphql/task/task-where-unique.input';
+import {
+  CreateTaskInput,
+  OrderByParams,
+  UpdateTaskPositionInput,
+} from '../graphql';
 import { TaskService } from './task.service';
 
 @Resolver('Task')
@@ -9,13 +13,13 @@ export class TaskResolver {
   constructor(private readonly taskService: TaskService) {}
 
   @Mutation('createTask')
-  create(@Args('createTaskInput') createTaskInput: TaskCreateInput) {
+  create(@Args('createTaskInput') createTaskInput: CreateTaskInput) {
     return this.taskService.create(createTaskInput);
   }
 
   @Query('tasks')
-  findAll() {
-    return this.taskService.findAll();
+  findAll(@Args('orderBy') orderBy?: OrderByParams) {
+    return this.taskService.findAll(orderBy);
   }
 
   @Query('task')
@@ -29,5 +33,13 @@ export class TaskResolver {
       { id: +updateTaskInput.id },
       updateTaskInput,
     );
+  }
+
+  @Mutation('updateTaskPosition')
+  updateTaskPosition(
+    @Args('updateTaskPositionInput')
+    updateTaskPosistionInput: UpdateTaskPositionInput,
+  ) {
+    return this.taskService.updateTaskPosition(updateTaskPosistionInput);
   }
 }

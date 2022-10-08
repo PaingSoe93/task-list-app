@@ -32,8 +32,6 @@ model Task {
   /// @Validator.IsString()
   /// @Validator.Length(3, 255)
   title      String
-  /// @Validator.IsNotEmpty()
-  /// @Validator.IsNumber()
   position  Int
   status    String?   @default("UNASSIGNED")
   list      List     @relation(fields: [listId], references: [id])
