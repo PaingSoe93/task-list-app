@@ -34,6 +34,13 @@ export class ListService {
   findOne(listWhereUniqueInput: Prisma.ListWhereUniqueInput) {
     let list = this.prisma.list.findUnique({
       where: listWhereUniqueInput,
+      include: {
+        tasks: {
+          orderBy: {
+            position: 'asc',
+          },
+        },
+      },
     });
     if (!list) {
       throw new BadRequestException('List not found!');

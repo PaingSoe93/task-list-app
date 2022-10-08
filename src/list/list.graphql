@@ -1,5 +1,5 @@
 type List {
-  id: ID!
+  id: Int!
   name: String!
   tasks: [Task!]!
 }
@@ -9,6 +9,7 @@ input CreateListInput {
 }
 
 input UpdateListInput {
+  id: Int!
   name: String
 }
 

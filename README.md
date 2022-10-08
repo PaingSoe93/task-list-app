@@ -5,7 +5,13 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
+```
+
+If you are using npm, Please use the following 
+
+```bash
+$ npm install --legacy-peer-deps
 ```
 
 ## DB Migration
@@ -17,10 +23,10 @@ $ npx prisma migrate dev --name init
 
 ```bash
 # development
-$ npm run dev
+$ yarn dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Test GraphQL

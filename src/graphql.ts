@@ -20,6 +20,7 @@ export class CreateListInput {
 }
 
 export class UpdateListInput {
+    id: number;
     name?: Nullable<string>;
 }
 
@@ -30,6 +31,7 @@ export class CreateTaskInput {
 }
 
 export class UpdateTaskInput {
+    id: number;
     title?: Nullable<string>;
     status?: Nullable<TaskStatus>;
 }
@@ -45,7 +47,7 @@ export class OrderByParams {
 }
 
 export class List {
-    id: string;
+    id: number;
     name: string;
     tasks: Task[];
 }
